@@ -1,5 +1,10 @@
 package com.clairvoyant.project;
 
+/*
+ * Super keyword can be used to call parent constructor or accessing both attribute and method. When you are trying to
+ * access the parent constructor you have to use super within the child constructor. Using super within constructor
+ * means calling parent constructor.
+ */
 public class Super {
   public static void main(String[] args) {
     var child1 = new Child1();
@@ -31,10 +36,6 @@ class Child1 extends Parent1 {
 class Parent2 {
   String name;
 
-  Parent2() {
-    this.name = "Default";
-  }
-
   Parent2(String name) {
     this.name = name;
   }
@@ -53,7 +54,7 @@ class Child2 extends Parent2 {
      *  Calling super is means calling parent constructor, so it's also depend on which one of the constructor
      *  do you want to call if the constructor is overloading.
      */
-    super(name);
+    super(name); // Calling Parent2 constructor
     this.name = "Cerbia";
   }
 
@@ -63,7 +64,7 @@ class Child2 extends Parent2 {
   }
 
   void getParentName() {
-    System.out.println(super.name); // Accessing parrent attribute
+    System.out.println(super.name); // Accessing Parent2 attribute
   }
 
   void sayHelloParent() {

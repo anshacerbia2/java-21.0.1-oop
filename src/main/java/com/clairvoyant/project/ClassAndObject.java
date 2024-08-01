@@ -2,11 +2,11 @@ package com.clairvoyant.project;
 
 // If you are about to use public modifier on class, then it will match the filename
 public class ClassAndObject {
-  // Attribute/field
+  // Attributes/field
   String name = "Ansha";
   int age = 17;
 
-  // Methode
+  // Method
   void sayHello() {
     System.out.println("Hello World!");
   }
@@ -27,7 +27,7 @@ public class ClassAndObject {
 /*
  * Class:
  * A class is a blueprint for creating objects. It defines a set of attributes (fields)
- * and methods that the created objects can use.
+ * and methods that the created objects can use. Every class in java are subclass of class Object
  *
  * Object:
  * An object is an instance of a class. It represents a specific example of the class,

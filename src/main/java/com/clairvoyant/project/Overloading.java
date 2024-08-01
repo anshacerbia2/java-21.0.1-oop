@@ -1,8 +1,6 @@
 package com.clairvoyant.project;
 
-/*
- * Overloading can be applied on constructor and method
- */
+// Overloading means duplicating method, can be applied on both constructor and method
 public class Overloading {
   String name;
   int age;
