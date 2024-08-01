@@ -2,8 +2,8 @@ package com.clairvoyant.project;
 
 /*
  * Inheritance in Java Object-Oriented Programming (OOP) is a mechanism where a new class (subclass or derived class)
- * inherits attributes and methods from an existing class (superclass or base class). It allows for code reuse and
- * the creation of a hierarchical relationship between classes.
+ * inherits attributes and methods from an existing class (superclass or base class). It allows for code reuse (reusable)
+ * and the creation of a hierarchical relationship between classes.
  *
  * Key Points:
  * Superclass: The class being inherited from.

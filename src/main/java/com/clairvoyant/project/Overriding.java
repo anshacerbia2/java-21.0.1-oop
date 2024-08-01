@@ -4,7 +4,7 @@ package com.clairvoyant.project;
 public class Overriding {
   public static void main(String[] args) {
     ChildClass instance = new ChildClass();
-    instance.greetings(); // "Hello World from child"
+    instance.greetings(); // "Hello world from child"
     instance.greetings2("Ansha"); // "Hello Ansha"
     instance.greetings2("morning", "Ansha"); // "Good morning Ansha"
   }
