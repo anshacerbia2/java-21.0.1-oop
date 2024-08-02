@@ -123,7 +123,7 @@ class Manager extends Employee {
 
 
 class Leader extends Employee {
-  // Additional attribute only for class Leader
+  // Additional attribute only on class Leader
   int age; // Not polymorphism
 
   Leader(String name, int age) {
