@@ -57,7 +57,7 @@ public class AnotherIndirectSubClass3 extends com.clairvoyant.project3.DirectSub
      * - Protected       -> Accessible
      * - Private         -> Not Accessible
      */
-    var a = new Public();
+    Public a = new Public();
     System.out.println(a.fname); // Returns "Ansha"
     System.out.println(a.lname); // Returns "Cerbia"
     System.out.println(a.age); // Returns 17
