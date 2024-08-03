@@ -7,21 +7,17 @@ package com.clairvoyant.project2;
  * 2. Public are accessible from any class in any package
  *
  * Constructor with access modifier:
- * 1. Private-Package only accessible from any class in the same package
- * 2. Public are accessible from any class in any package
- * 3. Protected are accessible from:
- *    - The class itself
- *    - The instance of the class itself that created on the class itself
- *    - Any subclass in the same package
- *    - An instance of subclass (in different package) that created within the subclass itself
- * 4. Private only accessible from the class itself and the instance of the class itself that created on the class itself
+ * 1. Private-Package only accessible from any class in the same package (and if it extends any classes, all ancestor should
+ *    also from the same package)
+ * 2. Public is accessible from any class in any package
+ * 3. Protected only accessible from any subclass in the same package
+ * 4. Private only accessible from the class itself
  *
  * Note: Constructor are not inherited, So subclass can only invoke constructor of its direct parent.
  *
  * Attribute/Method with access modifier:
- * 1. Private-Package only accessible from any class in the same package. If it becomes an object Constructor/Attribute/
- *    Method, it only invokable if where none of its ancestors come from different
- *    package, even if its superclass root or direct parent are in the same package.
+ * 1. Private-Package only accessible from any class in the same package as long as none of its ancestors come from
+ *    different package, even if its superclass root or direct parent are in the same package.
  * 2. Public are accessible from any class in any package
  * 3. Protected are accessible from:
  *    - The class itself
@@ -180,72 +176,52 @@ public class Public {
     System.out.println(b.fname); // Returns "Ansha"
     System.out.println(b.lname); // Returns "Cerbia"
     System.out.println(b.age); // Returns 17
-    System.out.println(b.country); // Returns 17
 
     var c = new IndirectSubClass();
     System.out.println(c.fname); // Returns "Ansha"
     System.out.println(c.lname); // Returns "Cerbia"
     System.out.println(c.age); // Returns 17
-    System.out.println(c.country); // Returns 17
 
     var d = new AnotherIndirectSubClass1();
     System.out.println(d.fname); // Returns "Ansha"
     System.out.println(d.lname); // Returns "Cerbia"
     System.out.println(d.age); // Returns 17
-    System.out.println(d.country); // Returns 17
 
     var e = new AnotherIndirectSubClass2();
     System.out.println(e.fname); // Returns "Ansha"
     System.out.println(e.lname); // Returns "Cerbia"
     System.out.println(e.age); // Returns 17
-    System.out.println(e.country); // Returns 17
 
     var f = new AnotherIndirectSubClass3();
-    System.out.println(f.fname); // Returns "Ansha"
     System.out.println(f.lname); // Returns "Cerbia"
     System.out.println(f.age); // Returns 17
-    System.out.println(f.country); // Returns 17
 
     var g = new AnotherIndirectSubClass4();
-    System.out.println(g.fname); // Returns "Ansha"
     System.out.println(g.lname); // Returns "Cerbia"
     System.out.println(g.age); // Returns 17
-    System.out.println(g.country); // Returns 17
 
-    var h = new com.clairvoyant.project3.DirectSubClass();
-    System.out.println(h.fname); // Returns "Ansha"
+    var h = new com.clairvoyant.project3.DirectSubClass("");
     System.out.println(h.lname); // Returns "Cerbia"
     System.out.println(h.age); // Returns 17
-    System.out.println(h.country); // Returns 17
 
-    var i = new com.clairvoyant.project3.IndirectSubClass();
-    System.out.println(i.fname); // Returns "Ansha"
+    var i = new com.clairvoyant.project3.IndirectSubClass("");
     System.out.println(i.lname); // Returns "Cerbia"
     System.out.println(i.age); // Returns 17
-    System.out.println(i.country); // Returns 17
 
-    var j = new com.clairvoyant.project3.AnotherIndirectSubClass1();
-    System.out.println(j.fname); // Returns "Ansha"
+    var j = new com.clairvoyant.project3.AnotherIndirectSubClass1("");
     System.out.println(j.lname); // Returns "Cerbia"
     System.out.println(j.age); // Returns 17
-    System.out.println(j.country); // Returns 17
 
-    var k = new com.clairvoyant.project3.AnotherIndirectSubClass2();
-    System.out.println(k.fname); // Returns "Ansha"
+    var k = new com.clairvoyant.project3.AnotherIndirectSubClass2("");
     System.out.println(k.lname); // Returns "Cerbia"
     System.out.println(k.age); // Returns 17
-    System.out.println(k.country); // Returns 17
 
-    var l = new com.clairvoyant.project3.AnotherIndirectSubClass3();
-    System.out.println(l.fname); // Returns "Ansha"
+    var l = new com.clairvoyant.project3.AnotherIndirectSubClass3("");
     System.out.println(l.lname); // Returns "Cerbia"
     System.out.println(l.age); // Returns 17
-    System.out.println(l.country); // Returns 17
 
-    var m = new com.clairvoyant.project3.AnotherIndirectSubClass4();
-    System.out.println(m.fname); // Returns "Ansha"
+    var m = new com.clairvoyant.project3.AnotherIndirectSubClass4("");
     System.out.println(m.lname); // Returns "Cerbia"
     System.out.println(m.age); // Returns 17
-    System.out.println(m.country); // Returns 17
   }
 }

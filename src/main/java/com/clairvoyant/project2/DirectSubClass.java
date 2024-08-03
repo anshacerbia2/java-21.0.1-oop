@@ -1,6 +1,13 @@
 package com.clairvoyant.project2;
 
 public class DirectSubClass extends Public {
+  /*
+   * Constructor:
+   * - Private-package: Accessible     -> super()
+   * - Public         : Accessible     -> super("a")
+   * - Protected      : Accessible     -> super("a", "b")
+   * - Private        : Not Accessible -> super("a", "b", "c")
+   */
   DirectSubClass() {
     super();
   }
@@ -10,36 +17,37 @@ public class DirectSubClass extends Public {
   }
 
   protected DirectSubClass(String a, String b) {
-    this("a", "b", "c"); // Private Constructor only invokable within the class itself
+    this("a", "b", "c");
   }
 
   private DirectSubClass(String a, String b, String c) {
     /*
-     * super("a", "b", "c"); -> Error: Public(String a, String b, String c) in com.clairvoyant.project2 has
+     * super("a", "b", "c"); -> Error: Public(String a, String b, String c) in com.clairvoyant.project2.Public has
      *                                 private access
+     * Since the superclass parameterless constructor is accessible from here we do not need call super here
      */
   }
 
   public static void main(String[] args) {
     /*
-     * Condition: Instance of class in the same package
+     * Condition Belows (a, b, c, d, e, f, g): Instance of class in the same package
+     *
      * Constructor:
-     * - Private-Package is invokable in the same package
-     * - Protected always invokable
-     * - Private always not invokable from another class
+     * - Private-Package -> Accessible (This class is in the same package as all classes of the instance and has no ancestors
+     *                      from different packages)
+     * - Public          -> Accessible
+     * - Protected       -> Accessible (All instance are subclass of superclass Public which is in the same package with
+     *                      this class)
+     * - Private         -> Not Accessible (Except b, because b is created within its own class which is this class)
+     *
      * Attribute/Method:
-     * - Private-Package is accessible in the same package as long as none of its ancestors come from different package,
-     *   even if its superclass root or direct parent are in the same package.
-     * - Protected always accessible
-     * - Private always not accessible from another class
+     * - Private-Package -> Accessible, except f and g, because one of their ancestor (direct parent) come from different
+     *                      package
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
      */
     var a = new Public();
-    /*
-     * Constructor bellow are invokable:
-     * new Public();
-     * new Public("a");
-     * new Public("a", "b");
-     */
     System.out.println(a.fname); // Returns "Ansha"
     System.out.println(a.lname); // Returns "Cerbia"
     System.out.println(a.age); // Returns 17
@@ -65,56 +73,52 @@ public class DirectSubClass extends Public {
     System.out.println(e.age); // Returns 17
 
     var f = new AnotherIndirectSubClass3();
-    /*
-     * System.out.println(f.fname); -> Error: "fname" is not public in 'com.clairvoyant.project2.Public'. Cannot be
-     *                                         accessed from outside package. Because class AnotherIndirectSubClass3
-     *                                         already inherits fname from direct/indirect parent in different package
-     */
     System.out.println(f.lname); // Returns "Cerbia"
     System.out.println(f.age); // Returns 17
 
     var g = new AnotherIndirectSubClass4();
-    /*
-     * System.out.println(f.fname); -> Error: 'fname' is not public in 'com.clairvoyant.project2.Public'. Cannot be
-     *                                         accessed from outside package
-     */
     System.out.println(g.lname); // Returns "Cerbia"
     System.out.println(g.age); // Returns 17
 
     /*
-     * Condition: Instance of class in different package
-     * - Private always not accessible
-     * - Protected always accessible. Even if the parent of the instance
-     * - Accessing private-package attribute/method from instance of a class from different package are not allowed.
-     *   Even if the class of the instance has been extended to the superclass in this package.
+     * Condition Belows (h, i, j, k, l, m): Instance of class in different package
+     *
+     * Constructor:
+     * - Private-Package -> Not Accessible (All instance's ancestor which is their parent class come from different
+     *                      package)
+     * - Public          -> Accessible
+     * - Protected       -> Not Accessible (All instance's class are subclass of Public but placed in different package
+     *                      with class Public)
+     * - Private         -> Not Accessible
+     *
+     * Attribute/Method:
+     * - Private-Package -> Not Accessible (All instance has at least one of their ancestor in different package)
+     * - Public          -> Accessible
+     * - Protected       -> Accessible (All instance's classes are subclass of Public and created within this class which
+     *                      is in the same package with class Public)
+     * - Private         -> Not Accessible
      */
-    var h = new com.clairvoyant.project3.DirectSubClass();
-    System.out.println(h.fname); // Returns "Ansha"
+    var h = new com.clairvoyant.project3.DirectSubClass("");
     System.out.println(h.lname); // Returns "Cerbia"
     System.out.println(h.age); // Returns 17
 
-    var i = new com.clairvoyant.project3.IndirectSubClass();
-    System.out.println(i.fname); // Returns "Ansha"
+    var i = new com.clairvoyant.project3.IndirectSubClass("");
     System.out.println(i.lname); // Returns "Cerbia"
     System.out.println(i.age); // Returns 17
 
-    var j = new com.clairvoyant.project3.AnotherIndirectSubClass1();
-    System.out.println(j.fname); // Returns "Ansha"
+    var j = new com.clairvoyant.project3.AnotherIndirectSubClass1("");
     System.out.println(j.lname); // Returns "Cerbia"
     System.out.println(j.age); // Returns 17
 
-    var k = new com.clairvoyant.project3.AnotherIndirectSubClass2();
-    System.out.println(k.fname); // Returns "Ansha"
+    var k = new com.clairvoyant.project3.AnotherIndirectSubClass2("");
     System.out.println(k.lname); // Returns "Cerbia"
     System.out.println(k.age); // Returns 17
 
-    var l = new com.clairvoyant.project3.AnotherIndirectSubClass3();
-    System.out.println(l.fname); // Returns "Ansha"
+    var l = new com.clairvoyant.project3.AnotherIndirectSubClass3("");
     System.out.println(l.lname); // Returns "Cerbia"
     System.out.println(l.age); // Returns 17
 
-    var m = new com.clairvoyant.project3.AnotherIndirectSubClass4();
-    System.out.println(m.fname); // Returns "Ansha"
+    var m = new com.clairvoyant.project3.AnotherIndirectSubClass4("");
     System.out.println(m.lname); // Returns "Cerbia"
     System.out.println(m.age); // Returns 17
   }

@@ -4,6 +4,11 @@ package com.clairvoyant.project;
  * Super keyword can be used to call parent constructor or accessing both attribute and method. When you are trying to
  * access the parent constructor you have to use super within the child constructor. Using super within constructor
  * means calling parent constructor.
+ *
+ * Important:
+ * If superclass has constructor with parameters, then the children should at least has one constructor that calls super
+ * within it. If children has more than one constructor, then each constructor in children should call super (that match
+ * at least one parent's constructor) inside each constructor.
  */
 public class Super {
   public static void main(String[] args) {
@@ -58,6 +63,17 @@ class Child2 extends Parent2 {
     this.name = "Cerbia";
   }
 
+  /*
+   * Defining constructor that not match any constructor on parents will produce error:
+   * There is no parameterless constructor available in 'com.clairvoyant.project.Parent2'
+   *
+   * E.g.
+   * Child2(int age) {
+   * }
+   *
+   * The error will also occur if there is no constructor within this class, because there is a constructor on
+   * parent that need arguments which is Parent2(String name)
+   */
 
   void sayHello() {
     System.out.println("Hello " + this.name);
