@@ -98,7 +98,7 @@ class Employee {
     }
   }
 
-  // Type check using "Pattern Variable"
+  // Type check using "Pattern Variable" for Java 21.0.1
   static void typeCheck2(Employee instance) {
     if (instance instanceof Manager manager) {
       System.out.println("Hello Manager " + manager.name);

@@ -84,8 +84,7 @@ public class DirectSubClass extends Public {
      * Condition Belows (h, i, j, k, l, m): Instance of class in different package
      *
      * Constructor:
-     * - Private-Package -> Not Accessible (All instance's ancestor which is their parent class come from different
-     *                      package)
+     * - Private-Package -> Not Accessible (All instance's classes comes from different package)
      * - Public          -> Accessible
      * - Protected       -> Not Accessible (All instance's class are subclass of Public but placed in different package
      *                      with class Public)

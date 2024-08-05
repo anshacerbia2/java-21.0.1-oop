@@ -27,5 +27,9 @@ public class AnotherIndirectSubClass1 extends DirectSubClass {
      * Since the superclass parameterless constructor is accessible from here we do not need call super here
      */
   }
+
+  public static void main(String[] args) {
+
+  }
 }
 

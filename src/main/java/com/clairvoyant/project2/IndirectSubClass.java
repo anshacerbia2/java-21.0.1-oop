@@ -79,41 +79,29 @@ public class IndirectSubClass extends DirectSubClass {
     var g = new AnotherIndirectSubClass4();
     System.out.println(g.lname); // Returns "Cerbia"
     System.out.println(g.age); // Returns 17
+// ----------
+    var h = new com.clairvoyant.project3.DirectSubClass("");
+    System.out.println(h.lname); // Returns "Cerbia"
+    System.out.println(h.age); // Returns 17
 
-//    var h = new com.clairvoyant.project3.DirectSubClass();
-//    System.out.println(h.fname); // Returns "Ansha"
-//    System.out.println(h.lname); // Returns "Cerbia"
-//    System.out.println(h.age); // Returns 17
-//    System.out.println(h.country); // Returns 17
-//
-//    var i = new com.clairvoyant.project3.IndirectSubClass();
-//    System.out.println(i.fname); // Returns "Ansha"
-//    System.out.println(i.lname); // Returns "Cerbia"
-//    System.out.println(i.age); // Returns 17
-//    System.out.println(i.country); // Returns 17
-//
-//    var j = new com.clairvoyant.project3.AnotherIndirectSubClass1();
-//    System.out.println(j.fname); // Returns "Ansha"
-//    System.out.println(j.lname); // Returns "Cerbia"
-//    System.out.println(j.age); // Returns 17
-//    System.out.println(j.country); // Returns 17
-//
-//    var k = new com.clairvoyant.project3.AnotherIndirectSubClass2();
-//    System.out.println(k.fname); // Returns "Ansha"
-//    System.out.println(k.lname); // Returns "Cerbia"
-//    System.out.println(k.age); // Returns 17
-//    System.out.println(k.country); // Returns 17
-//
-//    var l = new com.clairvoyant.project3.AnotherIndirectSubClass3();
-//    System.out.println(l.fname); // Returns "Ansha"
-//    System.out.println(l.lname); // Returns "Cerbia"
-//    System.out.println(l.age); // Returns 17
-//    System.out.println(l.country); // Returns 17
-//
-//    var m = new com.clairvoyant.project3.AnotherIndirectSubClass4();
-//    System.out.println(m.fname); // Returns "Ansha"
-//    System.out.println(m.lname); // Returns "Cerbia"
-//    System.out.println(m.age); // Returns 17
-//    System.out.println(m.country); // Returns 17
+    var i = new com.clairvoyant.project3.IndirectSubClass("");
+    System.out.println(i.lname); // Returns "Cerbia"
+    System.out.println(i.age); // Returns 17
+
+    var j = new com.clairvoyant.project3.AnotherIndirectSubClass1("");
+    System.out.println(j.lname); // Returns "Cerbia"
+    System.out.println(j.age); // Returns 17
+
+    var k = new com.clairvoyant.project3.AnotherIndirectSubClass2("");
+    System.out.println(k.lname); // Returns "Cerbia"
+    System.out.println(k.age); // Returns 17
+
+    var l = new com.clairvoyant.project3.AnotherIndirectSubClass3("");
+    System.out.println(l.lname); // Returns "Cerbia"
+    System.out.println(l.age); // Returns 17
+
+    var m = new com.clairvoyant.project3.AnotherIndirectSubClass4("");
+    System.out.println(m.lname); // Returns "Cerbia"
+    System.out.println(m.age); // Returns 17
   }
 }

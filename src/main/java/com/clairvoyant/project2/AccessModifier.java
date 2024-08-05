@@ -23,6 +23,7 @@ public class AccessModifier {
     System.out.println(a.fname); // Returns "Ansha"
     System.out.println(a.lname); // Returns "Cerbia"
     System.out.println(a.age); // Returns 17
+System.out.println(Public.c);
 
     var b = new DirectSubClass();
     System.out.println(b.fname); // Returns "Ansha"

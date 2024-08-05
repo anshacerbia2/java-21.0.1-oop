@@ -16,14 +16,11 @@ package com.clairvoyant.project2;
  * Note: Constructor are not inherited, So subclass can only invoke constructor of its direct parent.
  *
  * Attribute/Method with access modifier:
- * 1. Private-Package only accessible from any class in the same package as long as none of its ancestors come from
- *    different package, even if its superclass root or direct parent are in the same package.
+ * 1. Private-Package accessible by any class in the same package, and none of the accessed class ex
  * 2. Public are accessible from any class in any package
  * 3. Protected are accessible from:
- *    - The class itself
- *    - The instance of the class itself that created on the class itself
- *    - Any subclass in the same package
- *    - An instance of subclass (in different package) that created within the subclass itself
+ *    - Same package (Any class)
+ *    - Different package (Class of the instance & ancestor of the instance)
  * 4. Private only accessible from the class itself and the instance of the class itself that created on the class itself
  *
  * Attribute/Method with non-access modifier:
