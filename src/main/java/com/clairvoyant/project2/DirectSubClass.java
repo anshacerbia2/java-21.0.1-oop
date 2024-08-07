@@ -30,19 +30,24 @@ public class DirectSubClass extends Public {
 
   public static void main(String[] args) {
     /*
-     * Condition Belows (a, b, c, d, e, f, g): Instance of class in the same package
+     * Condition Belows (a, b, c, d, e, f, g): Same package with this class
      *
      * Constructor:
-     * - Private-Package -> Accessible (This class is in the same package as all classes of the instance and has no ancestors
-     *                      from different packages)
+     * - Private-Package -> Accessible
      * - Public          -> Accessible
-     * - Protected       -> Accessible (All instance are subclass of superclass Public which is in the same package with
-     *                      this class)
-     * - Private         -> Not Accessible (Except b, because b is created within its own class which is this class)
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible (Except b)
      *
-     * Attribute/Method:
-     * - Private-Package -> Accessible, except f and g, because one of their ancestor (direct parent) come from different
-     *                      package
+     * Non-Static Attribute/Method,
+     * Static Attribute/Method (via instance):
+     * - Private-Package -> Accessible
+     *                      - Except for f and g, because one of their ancestor (direct parent) is from different package
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     *
+     * Static Attribute/Method (via superclass. e.g. Public.a):
+     * - Private-Package -> Accessible
      * - Public          -> Accessible
      * - Protected       -> Accessible
      * - Private         -> Not Accessible
@@ -81,20 +86,19 @@ public class DirectSubClass extends Public {
     System.out.println(g.age); // Returns 17
 
     /*
-     * Condition Belows (h, i, j, k, l, m): Instance of class in different package
+     * Condition Belows (h, i, j, k, l, m): Different package with this class
      *
      * Constructor:
-     * - Private-Package -> Not Accessible (All instance's classes comes from different package)
+     * - Private-Package -> Not Accessible
      * - Public          -> Accessible
-     * - Protected       -> Not Accessible (All instance's class are subclass of Public but placed in different package
-     *                      with class Public)
+     * - Protected       -> Not Accessible
      * - Private         -> Not Accessible
      *
-     * Attribute/Method:
-     * - Private-Package -> Not Accessible (All instance has at least one of their ancestor in different package)
+     * Non-Static Attribute/Method,
+     * Static Attribute/Method (via instance):
+     * - Private-Package -> Not Accessible
      * - Public          -> Accessible
-     * - Protected       -> Accessible (All instance's classes are subclass of Public and created within this class which
-     *                      is in the same package with class Public)
+     * - Protected       -> Accessible
      * - Private         -> Not Accessible
      */
     var h = new com.clairvoyant.project3.DirectSubClass("");

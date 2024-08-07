@@ -48,7 +48,8 @@ public class DirectSubClass extends Public {
      * Superclass Root: Different package from this class
      *
      * Constructor:
-     * - Private-Package -> Not Accessible (This class is in different package from all instances classes)
+     * - Private-Package -> Not Accessible
+     *                      - This class is in different package from all instances classes
      * - Public          -> Accessible
      * - Protected       -> Not Accessible (This class is in different package from all instances classes)
      * - Private         -> Not Accessible
@@ -63,7 +64,7 @@ public class DirectSubClass extends Public {
      */
     var a = new Public("");
     System.out.println(a.lname); // Returns "Cerbia"
-
+Public.b();
     var b = new com.clairvoyant.project2.DirectSubClass("");
     System.out.println(b.lname); // Returns "Cerbia"
 
@@ -90,10 +91,13 @@ public class DirectSubClass extends Public {
      * Superclass Root: Different package from this class
      *
      * Constructor:
-     * - Private-Package -> Accessible (This class is in the same package with all instances classes)
+     * - Private-Package -> Accessible
+     *                      - This class is in the same package with all instances classes
      * - Public          -> Accessible
-     * - Protected       -> Accessible (This class is in the same package with all instances classes)
-     * - Private         -> Not Accessible (Except for h, because h is created within its own class which is this class)
+     * - Protected       -> Accessible
+     *                      - This class is in the same package with all instances classes
+     * - Private         -> Not Accessible
+     *                      - Except for h, because h is created within its own class which is this class
      *
      * Attribute/Method:
      * - Private-Package -> Not Accessible

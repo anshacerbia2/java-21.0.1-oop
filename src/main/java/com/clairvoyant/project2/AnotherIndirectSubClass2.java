@@ -30,24 +30,30 @@ public class AnotherIndirectSubClass2 extends IndirectSubClass {
 
   public static void main(String[] args) {
     /*
-     * Condition Belows (a, b, c, d, e, f, g): Instance of class in the same package
+     * Condition Belows (a, b, c, d, e, f, g): Same package with this class
      *
      * Constructor:
-     * - Private-Package -> Accessible (This class is in the same package as all classes of the instance and has no ancestors
-     *                      from different packages)
+     * - Private-Package -> Accessible
      * - Public          -> Accessible
-     * - Protected       -> Accessible (All instance are subclass of superclass Public which is in the same package with
-     *                      this class)
-     * - Private         -> Not Accessible (Except e, because e is created within its own class which is this class)
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible (Except e)
      *
-     * Attribute/Method:
-     * - Private-Package -> Accessible, except f and g, because their ancestors (direct parent) come from different
-     *                      package
+     * Non-Static Attribute/Method,
+     * Static Attribute/Method (via instance):
+     * - Private-Package -> Accessible
+     *                      - Except for f and g, because one of their ancestor (direct parent) is from different package
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     *
+     * Static Attribute/Method (via superclass. e.g. Public.a):
+     * - Private-Package -> Accessible
      * - Public          -> Accessible
      * - Protected       -> Accessible
      * - Private         -> Not Accessible
      */
     var a = new Public();
+
     System.out.println(a.fname); // Returns "Ansha"
     System.out.println(a.lname); // Returns "Cerbia"
     System.out.println(a.age); // Returns 17
@@ -79,8 +85,23 @@ public class AnotherIndirectSubClass2 extends IndirectSubClass {
     var g = new AnotherIndirectSubClass4();
     System.out.println(g.lname); // Returns "Cerbia"
     System.out.println(g.age); // Returns 17
-    // bellow only public constructor accessible
 
+    /*
+     * Condition Belows (h, i, j, k, l, m): Different package with this class
+     *
+     * Constructor:
+     * - Private-Package -> Not Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Not Accessible
+     * - Private         -> Not Accessible
+     *
+     * Non-Static Attribute/Method,
+     * Static Attribute/Method (via instance):
+     * - Private-Package -> Not Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     */
     var h = new com.clairvoyant.project3.DirectSubClass("");
     System.out.println(h.lname); // Returns "Cerbia"
     System.out.println(h.age); // Returns 17

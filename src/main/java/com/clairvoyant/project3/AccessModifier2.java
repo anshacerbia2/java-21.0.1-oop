@@ -18,6 +18,7 @@ package com.clairvoyant.project3;
  */
 public class AccessModifier2 {
   public static void main(String[] args) {
+    var b = new com.clairvoyant.project2.DirectSubClass("");
 
   }
 }

@@ -7,21 +7,27 @@ package com.clairvoyant.project2;
  * 2. Public are accessible from any class in any package
  *
  * Constructor with access modifier:
- * 1. Private-Package only accessible from any class in the same package (and if it extends any classes, all ancestor should
- *    also from the same package)
- * 2. Public is accessible from any class in any package
- * 3. Protected only accessible from any subclass in the same package
- * 4. Private only accessible from the class itself
- *
- * Note: Constructor are not inherited, So subclass can only invoke constructor of its direct parent.
+ * 1. Private-Package accessible in:
+ *    - Same package as direct parent (by any classes)
+ * 2. Public accessible in:
+ *    - Any package (by any classes)
+ * 3. Protected accessible in:
+ *    - Same package as direct parent (by any classes)
+ * 4. Private only accessible from within the class itself
+ * Note: Constructor are not inherited, so access modifier is considered from direct parent package location.
  *
  * Attribute/Method with access modifier:
- * 1. Private-Package accessible by any class in the same package, and none of the accessed class ex
- * 2. Public are accessible from any class in any package
- * 3. Protected are accessible from:
- *    - Same package (Any class)
- *    - Different package (Class of the instance & ancestor of the instance)
- * 4. Private only accessible from the class itself and the instance of the class itself that created on the class itself
+ * 1. Private-Package accessible in:
+ *    - Same package as either the class itself or closest class ancestor where attribute/method inherited from (by any
+ *      classes)
+ *      Note: The accessed instance should not have ancestor from different package
+ * 2. Public accessible in:
+ *    - Any package (by any classes)
+ * 3. Protected accessible by:
+ *    - Neither class of the instance nor class ancestor of the instance (in same package as either the class itself or
+ *      closest class ancestor where attribute/method inherited from)
+ *    - Either class of the instance or class ancestor of the instance (in any package)
+ * 4. Private only accessible by setter and getter
  *
  * Attribute/Method with non-access modifier:
  * 1. Final: Attributes and methods cannot be overridden/modified
@@ -44,15 +50,10 @@ public class Public {
   protected int age = 17;
   private String country = "Indonesia";
 
-  static int a = 1;
-  public static int b = 2;
-  protected static int c = 3;
-  private static int d = 4;
-
-  static final int e = 1;
-  public static final int f = 2;
-  protected static final int g = 3;
-  private static final int h = 4;
+  static final int a = 1;
+  public static final int b = 2;
+  protected static final int c = 3;
+  private static final int d = 4;
 
   Public() {
   }
