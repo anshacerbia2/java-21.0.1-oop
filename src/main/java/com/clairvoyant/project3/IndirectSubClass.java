@@ -1,8 +1,5 @@
 package com.clairvoyant.project3;
 
-import com.clairvoyant.project2.Public;
-
-// Important: The context is that this class is in different package with superclass root (Public)
 public class IndirectSubClass extends DirectSubClass {
   /*
    * Constructor:
@@ -33,26 +30,50 @@ public class IndirectSubClass extends DirectSubClass {
 
   public static void main(String[] args) {
     /*
-     * Condition Belows (a, b, c, d, e, f, g): Instances of classes in different package
+     * For a, b, c, d, e, f, g, h, i, j, k, l, m:
      *
-     * Superclass Root: Different package from this class
+     * Static Attribute/Method (via instance),
+     * Static Attribute/Method (via class, e.g. Public.a):
+     * - Private-Package -> Not Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     */
+
+    /*
+     * Condition Belows (a, b, c, d, e, f, g): Different package from this class
      *
      * Constructor:
-     * - Private-Package -> Not Accessible (This class is in different package from all instances classes)
-     * - Public          -> Accessible
-     * - Protected       -> Not Accessible (This class is in different package from all instances classes)
-     * - Private         -> Not Accessible
-     *
-     * Attribute/Method:
      * - Private-Package -> Not Accessible
      * - Public          -> Accessible
      * - Protected       -> Not Accessible
-     *                      - This class is neither a superclass of all instances classes (directly/indirectly) nor the
-     *                        class of the instance itself, except for g
      * - Private         -> Not Accessible
+     *
+     * Non-Static Attribute/Method:
+     * - Private-Package -> Not Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Not Accessible
+     *                      - Except g, since this class is either class of the instance or class ancestor of f
+     * - Private         -> Not Accessible
+     *   Note: Accessible via getter
      */
-    var a = new Public("");
+    com.clairvoyant.project2.Public.b(); // Returns "On public class, public static method"
+    com.clairvoyant.project2.Public.c(); // Returns "On public class, protected static method"
+
+    var a = new com.clairvoyant.project2.Public("");
+    // NON-STATIC
+    // Attributes
     System.out.println(a.lname); // Returns "Cerbia"
+    // Methods
+    a.test2(); // Returns "On public class, public method"
+
+    // STATIC
+    // Attributes
+    System.out.println(a.b); // Returns 2
+    System.out.println(a.c); // Returns 3
+    // Methods
+    a.b(); // Returns "On public class, public static method"
+    a.c(); // Returns "On public class, protected static method"
 
     var b = new com.clairvoyant.project2.DirectSubClass("");
     System.out.println(b.lname); // Returns "Cerbia"
@@ -74,25 +95,21 @@ public class IndirectSubClass extends DirectSubClass {
     System.out.println(g.age); // Returns 17
 
     /*
-     * Condition Belows (h, i, j, k, l, m): Instances of classes in the same package
-     *
-     * Superclass Root: Different package from this class
+     * Condition Belows (h, i, j, k, l, m): Same package with this class
      *
      * Constructor:
-     * - Private-Package -> Accessible (This class is in the same package with all instances classes)
+     * - Private-Package -> Accessible
      * - Public          -> Accessible
-     * - Protected       -> Accessible (This class is in same package with all instances classes)
-     * - Private         -> Not Accessible (Except for h, because h is created within its own class which is this class)
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible (Except i)
      *
-     * Attribute/Method:
-     * - Private-Package -> Not Accessible (This class is in the same package with all instances classes. However, those
-     *                      instances classes are considered as different package since at least on of their ancestor
-     *                      placed in different package from this class)
+     * Non-Static Attribute/Method:
+     * - Private-Package -> Not Accessible
      * - Public          -> Accessible
      * - Protected       -> Not Accessible
-     *                      - This class is neither a superclass of all instances classes (directly/indirectly) nor the
-     *                        class of the instance itself, except for i and e
+     *                      - Except i and k, since this class is either class of the instance or class ancestor of i and k
      * - Private         -> Not Accessible
+     *   Note: Accessible via getter
      */
     var h = new DirectSubClass();
     System.out.println(h.lname); // Returns "Cerbia"
@@ -113,7 +130,13 @@ public class IndirectSubClass extends DirectSubClass {
 
     var m = new AnotherIndirectSubClass4();
     System.out.println(m.lname); // Returns "Cerbia"
-
-
+//    Public.a();
+//    Public.b();
+//    Public.c();
+//    Public.d();
+//    m.a();
+//    m.b();
+//    m.c();
+//    m.d();
   }
 }

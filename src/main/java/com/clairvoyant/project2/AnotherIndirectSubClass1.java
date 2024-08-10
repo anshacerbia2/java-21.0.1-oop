@@ -45,6 +45,7 @@ public class AnotherIndirectSubClass1 extends DirectSubClass {
      * - Public          -> Accessible
      * - Protected       -> Accessible
      * - Private         -> Not Accessible
+     *   Note: Accessible via getter
      *
      * Static Attribute/Method (via superclass. e.g. Public.a):
      * - Private-Package -> Accessible
@@ -53,7 +54,6 @@ public class AnotherIndirectSubClass1 extends DirectSubClass {
      * - Private         -> Not Accessible
      */
     var a = new Public();
-
     System.out.println(a.fname); // Returns "Ansha"
     System.out.println(a.lname); // Returns "Cerbia"
     System.out.println(a.age); // Returns 17
@@ -101,6 +101,7 @@ public class AnotherIndirectSubClass1 extends DirectSubClass {
      * - Public          -> Accessible
      * - Protected       -> Accessible
      * - Private         -> Not Accessible
+     *   Note: Accessible via getter
      */
     var h = new com.clairvoyant.project3.DirectSubClass("");
     System.out.println(h.lname); // Returns "Cerbia"

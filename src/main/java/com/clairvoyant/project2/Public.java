@@ -1,37 +1,68 @@
 package com.clairvoyant.project2;
 
 /*
- * Summarize
+ * SUMMARIZE
+ *
  * Class with access modifier:
  * 1. Private-Package only accessible from any class in the same package
  * 2. Public are accessible from any class in any package
  *
  * Constructor with access modifier:
- * 1. Private-Package accessible in:
- *    - Same package as direct parent (by any classes)
- * 2. Public accessible in:
- *    - Any package (by any classes)
+ * 1. Private-Package accessible by:
+ *    - Any classes in same package with the class of the constructor
+ * 2. Public accessible by:
+ *    - Any classes in any package
  * 3. Protected accessible in:
- *    - Same package as direct parent (by any classes)
- * 4. Private only accessible from within the class itself
- * Note: Constructor are not inherited, so access modifier is considered from direct parent package location.
+ *    - Any classes in same package with the class of the constructor
+ * 4. Private only accessible from within the class of the constructor
+ * Note: Constructor are not inherited
  *
- * Attribute/Method with access modifier:
- * 1. Private-Package accessible in:
- *    - Same package as either the class itself or closest class ancestor where attribute/method inherited from (by any
- *      classes)
- *      Note: The accessed instance should not have ancestor from different package
- * 2. Public accessible in:
- *    - Any package (by any classes)
+ * Non-Static Attribute/Method of an instance with access modifier:
+ * 1. Private-Package accessible by:
+ *    - Any classes in same package with the class that inherits the accessed attribute/method of the instance
+ * 2. Public accessible by:
+ *    - Any classes in any package
  * 3. Protected accessible by:
- *    - Neither class of the instance nor class ancestor of the instance (in same package as either the class itself or
- *      closest class ancestor where attribute/method inherited from)
+ *    - Neither class of the instance nor class ancestor of the instance (in same package with the class that inherits
+ *      the accessed attribute/method)
  *    - Either class of the instance or class ancestor of the instance (in any package)
- * 4. Private only accessible by setter and getter
+ * 4. Private accessible:
+ *    - With setter and getter (by any classes in any package)
+ *    - Without setter and getter (within the class that inherits the accessed attribute/method)
+ * Note: Non-Static Attribute/Method always accessed through instance reference
  *
  * Attribute/Method with non-access modifier:
- * 1. Final: Attributes and methods cannot be overridden/modified
- * 2. Static: Attributes and methods belongs to the class, rather than an object
+ * 1. Final   : Cannot be overridden/modified
+ * 2. Static  : Belongs to the class, rather than an object
+ *
+ * Static Attribute/Method (via class/instance reference) with access modifier:
+ * 1. Private-Package accessible by:
+ *    - Any classes in same package with the reference (class/class of the instance)
+ *      Important: The reference should not extend any classes outside the package
+ * 2. Public accessible by:
+ *    - Any classes in any package
+ * 3. Protected accessible by:
+ *    - Any subclasses of the class that inherits the accessed attribute/method of the reference (class/class of the
+ *      instance) in any package
+ *    - Any classes in same package with the class that inherits the accessed attribute/method of the reference
+ *      (class/class of the instance)
+ * 4. Private accessible:
+ *    - With setter and getter (by any classes in any package)
+ *    - Without setter and getter (within the class that inherits the accessed attribute/method)
+ * Note: The class ancestors of the instance package will be considered, because accessing through the instance reference
+ *
+ * Static Attribute/Method (via class reference) with access modifier:
+ * 1. Private-Package accessible by:
+ *    - Any class in same package with the accessed class
+ *      Important: The accessed class should not extend any classes outside the package
+ * 2. Public accessible by:
+ *    - Any classes in any package
+ * 3. Protected accessible by:
+ *    - Any Subclasses (direct/indirect) in different package from the accessed class
+ *    - Any classes in same package with the accessed class
+ * 4. Private accessible by:
+ *    - Its own class
+ * Note: The class ancestors of the accessed class package will be considered, because directly accessing the class reference
  *
  * Explanation:
  * Static Attributes (Class Variables): Static attributes are shared among all instances of a class. They are stored at
@@ -41,8 +72,8 @@ package com.clairvoyant.project2;
  *                                      its own copy of these attributes.
  * When you change the value of a static attribute, that change is reflected across all instances of the class.
  *
- * The class bellow accessed by class AccessModifier on package com.clairvoyant.project and AccessModifier2 on package
- * com.clairvoyant.project2
+ * The class bellow accessed by class AccessModifier on package com.clairvoyant.project2 and AccessModifier2 on package
+ * com.clairvoyant.project3
  */
 public class Public {
   String fname = "Ansha";
@@ -68,6 +99,14 @@ public class Public {
   private Public(String a, String b, String c) {
   }
 
+  public String getCountry() {
+    return this.country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
+
   void test() {
     System.out.println("On public class, private-package method");
   }
@@ -85,85 +124,46 @@ public class Public {
   }
 
   static void a() {
-    System.out.println("Private-package static on public class, private method");
+    System.out.println("On public class, private-package static method");
   }
 
   public static void b() {
-    System.out.println("Public static on public class, private method");
+    System.out.println("on public class, public static method");
   }
 
   protected static void c() {
-    System.out.println("Protected static on public class, private method");
+    System.out.println("On public class, protected static method");
   }
 
   private static void d() {
-    System.out.println("Private static on public class, private method");
+    System.out.println("On public class, private static method");
   }
 
-  //  public static void main(String[] args) {
-//    /*
-//     * Changing static attribute will implicate to the whole value of the instance
-//     */
-//    Public.a += 1;
-//    Public.b += 1;
-//    Public.c += 1;
-//    Public.d += 1;
-//
-//    var a = new Public();
-//    System.out.println(a.fname); // Returns "Ansha"
-//    System.out.println(a.lname); // Returns "Cerbia"
-//    System.out.println(a.age); // Returns 17
-//    System.out.println(a.country); // Returns "Indonesia"
-//
-//    /*
-//     * Final Modifier prevent Constructor/Attribute/Method to be reasign
-//     * a.e += 1; -> Error: Cannot assign a value to final variable "e"
-//     * a.f += 1; -> Error: Cannot assign a value to final variable "f"
-//     * a.g += 1; -> Error: Cannot assign a value to final variable "g"
-//     * a.h += 1; -> Error: Cannot assign a value to final variable "h"
-//     */
-//
-//    System.out.println(a.a); // Returns 2
-//    System.out.println(a.b); // Returns 3
-//    System.out.println(a.c); // Return 4
-//    System.out.println(a.d); // Returns 5
-//    System.out.println(a.e); // Returns 1
-//    System.out.println(a.f); // Returns 2
-//    System.out.println(a.g); // Returns 3
-//    System.out.println(a.h); // Returns 4
-//
-//    a.a += 1;
-//    a.b += 1;
-//    a.c += 1;
-//    a.d += 1;
-//
-//    System.out.println(a.a); // Returns 3
-//    System.out.println(a.b); // Returns 4
-//    System.out.println(a.c); // Return 5
-//    System.out.println(a.d); // Returns 6
-//    System.out.println(Public.a); // Returns 3
-//    System.out.println(Public.b); // Returns 4
-//    System.out.println(Public.c); // Return 5
-//    System.out.println(Public.d); // Returns 6
-//
-//    System.out.println(a.a); // Returns 2
-//    System.out.println(a.b); // Returns 3
-//    System.out.println(a.c); // Return 4
-//    System.out.println(a.d); // Returns 5
-//
-//    a.test(); // Returns "On public class, private-package method"
-//    a.test2(); // Returns "On public class, public method"
-//    a.test3(); // Returns "On public class, protected method"
-//    a.test4(); // Returns "On public class, private method"
-//
-//    a.a(); // Returns "Private-package static on public class, private method"
-//    a.b(); // Returns "Public static on public class, private method"
-//    a.c(); // Returns "Protected static on public class, private method"
-//    a.d(); // Returns "Private static on public class, private method"
-//
-//  }
-
   public static void main(String[] args) {
+    /*
+     * Condition Belows (a, b, c, d, e, f, g): Same package with this class
+     *
+     * Constructor:
+     * - Private-Package -> Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible (Except a)
+     *
+     * Non-Static Attribute/Method,
+     * Static Attribute/Method (via instance):
+     * - Private-Package -> Accessible
+     *                      - Except for f and g, because one of their ancestor (direct parent) is from different package
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible (Except a)
+     *   Note: Accessible via getter
+     *
+     * Static Attribute/Method (via superclass. e.g. Public.a):
+     * - Private-Package -> Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Accessible
+     */
     var a = new Public();
     System.out.println(a.fname); // Returns "Ansha"
     System.out.println(a.lname); // Returns "Cerbia"
@@ -198,6 +198,23 @@ public class Public {
     System.out.println(g.lname); // Returns "Cerbia"
     System.out.println(g.age); // Returns 17
 
+    /*
+     * Condition Belows (h, i, j, k, l, m): Different package with this class
+     *
+     * Constructor:
+     * - Private-Package -> Not Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Not Accessible
+     * - Private         -> Not Accessible
+     *
+     * Non-Static Attribute/Method,
+     * Static Attribute/Method (via instance):
+     * - Private-Package -> Not Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     *   Note: Accessible via getter
+     */
     var h = new com.clairvoyant.project3.DirectSubClass("");
     System.out.println(h.lname); // Returns "Cerbia"
     System.out.println(h.age); // Returns 17
