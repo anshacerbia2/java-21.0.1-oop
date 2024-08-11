@@ -32,22 +32,21 @@ public class DirectSubClass extends Public {
     /*
      * For a, b, c, d, e, f, g, h, i, j, k, l, m:
      *
-     * Static Attribute/Method (via class, e.g. Public.a):
-     * - Private-Package -> Accessible
+     * Static Attribute/Method (via class):
+     * - Private-Package -> Accessible (Except f, g, h, i, j, k, l and m)
      * - Public          -> Accessible
      * - Protected       -> Accessible
      * - Private         -> Not Accessible
      *
      * Static Attribute/Method (via instance):
-     * - Private-Package -> Accessible
-     *                      - Except for f and g, because one of their ancestor (direct parent) is from different package
+     * - Private-Package -> Accessible (Except f, g, h, i, j, k, l and m)
      * - Public          -> Accessible
      * - Protected       -> Accessible
      * - Private         -> Not Accessible
      */
 
     /*
-     * Condition Belows (a, b, c, d, e, f, g): Same package with this class
+     * Each class of instances (a, b, c, d, e, f, g): Same package with this class
      *
      * Constructor:
      * - Private-Package -> Accessible
@@ -56,17 +55,12 @@ public class DirectSubClass extends Public {
      * - Private         -> Not Accessible (Except b)
      *
      * Non-Static Attribute/Method:
-     * - Private-Package -> Accessible
-     *                      - Except for f and g, because one of their ancestor (direct parent) is from different package
+     * - Private-Package -> Accessible (Except f and g)
      * - Public          -> Accessible
      * - Protected       -> Accessible
      * - Private         -> Not Accessible
      *   Note: Accessible via getter
      */
-    Public.a(); // Returns "On public class, private-package static method"
-    Public.b(); // Returns "On public class, public static method"
-    Public.c(); // Returns "On public class, protected static method"
-
     var a = new Public();
     // NON-STATIC
     // Attributes
@@ -79,14 +73,22 @@ public class DirectSubClass extends Public {
     a.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(a.a); // Returns 1
     System.out.println(a.b); // Returns 2
     System.out.println(a.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(Public.a); // Returns 1
+    System.out.println(Public.b); // Returns 2
+    System.out.println(Public.c); // Returns 3
+    // Methods via instance
     a.a(); // Returns "On public class, private-package static method"
     a.b(); // Returns "On public class, public static method"
     a.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    Public.a(); // Returns "On public class, private-package static method"
+    Public.b(); // Returns "On public class, public static method"
+    Public.c(); // Returns "On public class, protected static method"
 
     var b = new DirectSubClass();
     // NON-STATIC
@@ -100,14 +102,22 @@ public class DirectSubClass extends Public {
     b.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(b.a); // Returns 1
     System.out.println(b.b); // Returns 2
     System.out.println(b.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(DirectSubClass.a); // Returns 1
+    System.out.println(DirectSubClass.b); // Returns 2
+    System.out.println(DirectSubClass.c); // Returns 3
+    // Methods via instance
     b.a(); // Returns "On public class, private-package static method"
     b.b(); // Returns "On public class, public static method"
     b.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    DirectSubClass.a(); // Returns "On public class, private-package static method"
+    DirectSubClass.b(); // Returns "On public class, public static method"
+    DirectSubClass.c(); // Returns "On public class, protected static method"
 
     var c = new IndirectSubClass();
     // NON-STATIC
@@ -121,14 +131,22 @@ public class DirectSubClass extends Public {
     c.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(c.a); // Returns 1
     System.out.println(c.b); // Returns 2
     System.out.println(c.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(IndirectSubClass.a); // Returns 1
+    System.out.println(IndirectSubClass.b); // Returns 2
+    System.out.println(IndirectSubClass.c); // Returns 3
+    // Methods via instance
     c.a(); // Returns "On public class, private-package static method"
     c.b(); // Returns "On public class, public static method"
     c.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    IndirectSubClass.a(); // Returns "On public class, private-package static method"
+    IndirectSubClass.b(); // Returns "On public class, public static method"
+    IndirectSubClass.c(); // Returns "On public class, protected static method"
 
     var d = new AnotherIndirectSubClass1();
     // NON-STATIC
@@ -142,14 +160,22 @@ public class DirectSubClass extends Public {
     d.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(d.a); // Returns 1
     System.out.println(d.b); // Returns 2
     System.out.println(d.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(AnotherIndirectSubClass1.a); // Returns 1
+    System.out.println(AnotherIndirectSubClass1.b); // Returns 2
+    System.out.println(AnotherIndirectSubClass1.c); // Returns 3
+    // Methods via instance
     d.a(); // Returns "On public class, private-package static method"
     d.b(); // Returns "On public class, public static method"
     d.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    AnotherIndirectSubClass1.a(); // Returns "On public class, private-package static method"
+    AnotherIndirectSubClass1.b(); // Returns "On public class, public static method"
+    AnotherIndirectSubClass1.c(); // Returns "On public class, protected static method"
 
     var e = new AnotherIndirectSubClass2();
     // NON-STATIC
@@ -163,14 +189,22 @@ public class DirectSubClass extends Public {
     e.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(e.a); // Returns 1
     System.out.println(e.b); // Returns 2
     System.out.println(e.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(AnotherIndirectSubClass2.a); // Returns 1
+    System.out.println(AnotherIndirectSubClass2.b); // Returns 2
+    System.out.println(AnotherIndirectSubClass2.c); // Returns 3
+    // Methods via instance
     e.a(); // Returns "On public class, private-package static method"
     e.b(); // Returns "On public class, public static method"
     e.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    AnotherIndirectSubClass2.a(); // Returns "On public class, private-package static method"
+    AnotherIndirectSubClass2.b(); // Returns "On public class, public static method"
+    AnotherIndirectSubClass2.c(); // Returns "On public class, protected static method"
 
     var f = new AnotherIndirectSubClass3();
     // NON-STATIC
@@ -182,12 +216,18 @@ public class DirectSubClass extends Public {
     f.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(f.b); // Returns 2
     System.out.println(f.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(AnotherIndirectSubClass3.b); // Returns 2
+    System.out.println(AnotherIndirectSubClass3.c); // Returns 3
+    // Methods via instance
     f.b(); // Returns "On public class, public static method"
     f.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    AnotherIndirectSubClass3.b(); // Returns "On public class, public static method"
+    AnotherIndirectSubClass3.c(); // Returns "On public class, protected static method"
 
     var g = new AnotherIndirectSubClass4();
     // NON-STATIC
@@ -199,15 +239,21 @@ public class DirectSubClass extends Public {
     g.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(g.b); // Returns 2
     System.out.println(g.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(AnotherIndirectSubClass4.b); // Returns 2
+    System.out.println(AnotherIndirectSubClass4.c); // Returns 3
+    // Methods via instance
     g.b(); // Returns "On public class, public static method"
     g.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    AnotherIndirectSubClass4.b(); // Returns "On public class, public static method"
+    AnotherIndirectSubClass4.c(); // Returns "On public class, protected static method"
 
     /*
-     * Condition Belows (h, i, j, k, l, m): Different package with this class
+     * Each class of instances (h, i, j, k, l, m): Different package with this class
      *
      * Constructor:
      * - Private-Package -> Not Accessible
@@ -232,12 +278,18 @@ public class DirectSubClass extends Public {
     h.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(h.b); // Returns 2
     System.out.println(h.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.DirectSubClass.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.DirectSubClass.c); // Returns 3
+    // Methods via instance
     h.b(); // Returns "On public class, public static method"
     h.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    com.clairvoyant.project3.DirectSubClass.b(); // Returns "On public class, public static method"
+    com.clairvoyant.project3.DirectSubClass.c(); // Returns "On public class, protected static method"
 
     var i = new com.clairvoyant.project3.IndirectSubClass("");
     // NON-STATIC
@@ -249,12 +301,18 @@ public class DirectSubClass extends Public {
     i.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(i.b); // Returns 2
     System.out.println(i.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.IndirectSubClass.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.IndirectSubClass.c); // Returns 3
+    // Methods via instance
     i.b(); // Returns "On public class, public static method"
     i.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    com.clairvoyant.project3.IndirectSubClass.b(); // Returns "On public class, public static method"
+    com.clairvoyant.project3.IndirectSubClass.c(); // Returns "On public class, protected static method"
 
     var j = new com.clairvoyant.project3.AnotherIndirectSubClass1("");
     // NON-STATIC
@@ -266,12 +324,18 @@ public class DirectSubClass extends Public {
     j.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(j.b); // Returns 2
     System.out.println(j.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.AnotherIndirectSubClass1.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.AnotherIndirectSubClass1.c); // Returns 3
+    // Methods via instance
     j.b(); // Returns "On public class, public static method"
     j.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    com.clairvoyant.project3.AnotherIndirectSubClass1.b(); // Returns "On public class, public static method"
+    com.clairvoyant.project3.AnotherIndirectSubClass1.c(); // Returns "On public class, protected static method"
 
     var k = new com.clairvoyant.project3.AnotherIndirectSubClass2("");
     // NON-STATIC
@@ -283,12 +347,18 @@ public class DirectSubClass extends Public {
     k.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(k.b); // Returns 2
     System.out.println(k.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.AnotherIndirectSubClass2.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.AnotherIndirectSubClass2.c); // Returns 3
+    // Methods via instance
     k.b(); // Returns "On public class, public static method"
     k.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    com.clairvoyant.project3.AnotherIndirectSubClass2.b(); // Returns "On public class, public static method"
+    com.clairvoyant.project3.AnotherIndirectSubClass2.c(); // Returns "On public class, protected static method"
 
     var l = new com.clairvoyant.project3.AnotherIndirectSubClass3("");
     // NON-STATIC
@@ -300,12 +370,18 @@ public class DirectSubClass extends Public {
     l.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(l.b); // Returns 2
     System.out.println(l.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.AnotherIndirectSubClass3.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.AnotherIndirectSubClass3.c); // Returns 3
+    // Methods via instance
     l.b(); // Returns "On public class, public static method"
     l.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    com.clairvoyant.project3.AnotherIndirectSubClass3.b(); // Returns "On public class, public static method"
+    com.clairvoyant.project3.AnotherIndirectSubClass3.c(); // Returns "On public class, protected static method"
 
     var m = new com.clairvoyant.project3.AnotherIndirectSubClass4("");
     // NON-STATIC
@@ -317,11 +393,17 @@ public class DirectSubClass extends Public {
     m.test3(); // Returns "On public class, protected method"
 
     // STATIC
-    // Attributes
+    // Attributes via instance
     System.out.println(m.b); // Returns 2
     System.out.println(m.c); // Returns 3
-    // Methods
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.AnotherIndirectSubClass4.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.AnotherIndirectSubClass4.c); // Returns 3
+    // Methods via instance
     m.b(); // Returns "On public class, public static method"
     m.c(); // Returns "On public class, protected static method"
+    // Methods via class
+    com.clairvoyant.project3.AnotherIndirectSubClass4.b(); // Returns "On public class, public static method"
+    com.clairvoyant.project3.AnotherIndirectSubClass4.c(); // Returns "On public class, protected static method"
   }
 }
