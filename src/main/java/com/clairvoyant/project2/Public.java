@@ -24,6 +24,200 @@ public class Public {
   private Public(String a, String b, String c) {
   }
 
+  class NSIP {
+    static class NSIPChild {
+    }
+  }
+
+  class NSIP2 {
+    class NSIP2Child {
+      static class NSIP2GrandChild {
+      }
+    }
+  }
+
+  static class SIP {
+    class SIPChild {
+      class SIPGrandChild {
+      }
+    }
+  }
+
+  static class SIP2 {
+    static class SIP2Child {
+      class SIP2GrandChild {
+      }
+    }
+  }
+
+  public static class SIPExample {
+    String fname = "Ansha";
+    public String lname = "Cerbia";
+    protected int age = 17;
+    private String country = "Indonesia";
+
+    static final int a = 1;
+    public static final int b = 2;
+    protected static final int c = 3;
+    private static final int d = 4;
+
+    void test() {
+      System.out.println("On public static nested class, private-package method");
+    }
+
+    public void test2() {
+      System.out.println("On public static nested class, public method");
+    }
+
+    protected void test3() {
+      System.out.println("On public static nested class, protected method");
+    }
+
+    private void test4() {
+      System.out.println("On public static nested class, private method");
+    }
+
+    static void a() {
+      System.out.println("On public static nested class, private-package static method");
+    }
+
+    public static void b() {
+      System.out.println("on public static nested class, public static method");
+    }
+
+    protected static void c() {
+      System.out.println("On public static nested class, protected static method");
+    }
+
+    private static void d() {
+      System.out.println("On public static nested class, private static method");
+    }
+
+    public class SIPExampleChild {
+      String fname = "Ansha";
+      public String lname = "Cerbia";
+      protected int age = 17;
+      private String country = "Indonesia";
+
+      static final int a = 1;
+      public static final int b = 2;
+      protected static final int c = 3;
+      private static final int d = 4;
+
+      SIPExampleChild() {
+      }
+
+      public SIPExampleChild(String a) {
+      }
+
+      protected SIPExampleChild(String a, String b) {
+        this("a", "b", "c"); // Private Constructor only invokable within the class itself
+      }
+
+      private SIPExampleChild(String a, String b, String c) {
+      }
+
+      void test() {
+        System.out.println("On public inner class, private-package method");
+      }
+
+      public void test2() {
+        System.out.println("On public inner class, public method");
+      }
+
+      protected void test3() {
+        System.out.println("On public inner class, protected method");
+      }
+
+      private void test4() {
+        System.out.println("On public inner class, private method");
+      }
+
+      static void a() {
+        System.out.println("On public inner class, private-package static method");
+      }
+
+      public static void b() {
+        System.out.println("on public inner class, public static method");
+      }
+
+      protected static void c() {
+        System.out.println("On public inner class, protected static method");
+      }
+
+      private static void d() {
+        System.out.println("On public inner class, private static method");
+      }
+
+      public static class SIPExampleGrandChild {
+        String fname = "Ansha";
+        public String lname = "Cerbia";
+        protected int age = 17;
+        private String country = "Indonesia";
+
+        static final int a = 1;
+        public static final int b = 2;
+        protected static final int c = 3;
+        private static final int d = 4;
+
+        SIPExampleGrandChild() {
+        }
+
+        public SIPExampleGrandChild(String a) {
+        }
+
+        protected SIPExampleGrandChild(String a, String b) {
+          this("a", "b", "c"); // Private Constructor only invokable within the class itself
+        }
+
+        private SIPExampleGrandChild(String a, String b, String c) {
+        }
+
+        void test() {
+          System.out.println("On public static nested class, private-package method");
+        }
+
+        public void test2() {
+          System.out.println("On public static nested class, public method");
+        }
+
+        protected void test3() {
+          System.out.println("On public static nested class, protected method");
+        }
+
+        private void test4() {
+          System.out.println("On public static nested class, private method");
+        }
+
+        static void a() {
+          System.out.println("On public static nested class, private-package static method");
+        }
+
+        public static void b() {
+          System.out.println("on public static nested class, public static method");
+        }
+
+        protected static void c() {
+          System.out.println("On public static nested class, protected static method");
+        }
+
+        private static void d() {
+          System.out.println("On public static nested class, private static method");
+        }
+
+        public class XXX {
+          public static class YYY {
+          }
+        }
+
+        public static class ZZZ {
+          public class WWW {
+          }
+        }
+      }
+    }
+  }
+
   public String getCountry() {
     return this.country;
   }
@@ -447,5 +641,309 @@ public class Public {
     // Methods via class
     com.clairvoyant.project3.AnotherIndirectSubClass4.b(); // Returns "On public class, public static method"
     com.clairvoyant.project3.AnotherIndirectSubClass4.c(); // Returns "On public class, protected static method"
+
+    // NESTED CLASS
+    var x = new SIPExample();
+    // NON-STATIC
+    // Attributes
+    System.out.println(x.fname); // Returns "Ansha"
+    System.out.println(x.lname); // Returns "Cerbia"
+    System.out.println(x.age); // Returns 17
+    System.out.println(x.country); // Returns "Indonesia"
+    // Methods
+    x.test(); // Returns "On public static nested class, private-package method"
+    x.test2(); // Returns "On public static nested class, public method"
+    x.test3(); // Returns "On public static nested class, protected method"
+    x.test4(); // Returns "On public static nested class, private method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(x.a); // Returns 1
+    System.out.println(x.b); // Returns 2
+    System.out.println(x.c); // Returns 3
+    System.out.println(x.d); // Returns 4
+    // Attributes via class
+    System.out.println(SIPExample.a); // Returns 1
+    System.out.println(SIPExample.b); // Returns 2
+    System.out.println(SIPExample.c); // Returns 3
+    System.out.println(SIPExample.d); // Returns 4
+    // Methods via instance
+    x.a(); // Returns "On public static nested class, private-package method"
+    x.b(); // Returns "On public static nested class, public method"
+    x.c(); // Returns "On public static nested class, protected method"
+    x.d(); // Returns "On public static nested class, private method"
+    // Methods via class
+    SIPExample.a(); // Returns "On public static nested class, private-package method"
+    SIPExample.b(); // Returns "On public static nested class, public method"
+    SIPExample.c(); // Returns "On public static nested class, protected method"
+    SIPExample.d(); // Returns "On public static nested class, private method"
+
+    var y = new SIPExample.SIPExampleChild.SIPExampleGrandChild();
+    // NON-STATIC
+    // Attributes
+    System.out.println(y.fname); // Returns "Ansha"
+    System.out.println(y.lname); // Returns "Cerbia"
+    System.out.println(y.age); // Returns 17
+    System.out.println(y.country); // Returns "Indonesia"
+    // Methods
+    y.test(); // Returns "On public static nested class, private-package method"
+    y.test2(); // Returns "On public static nested class, public method"
+    y.test3(); // Returns "On public static nested class, protected method"
+    y.test4(); // Returns "On public static nested class, private method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(y.a); // Returns 1
+    System.out.println(y.b); // Returns 2
+    System.out.println(y.c); // Returns 3
+    System.out.println(y.d); // Returns 4
+    // Attributes via class
+    System.out.println(SIPExample.SIPExampleChild.SIPExampleGrandChild.a); // Returns 1
+    System.out.println(SIPExample.SIPExampleChild.SIPExampleGrandChild.b); // Returns 2
+    System.out.println(SIPExample.SIPExampleChild.SIPExampleGrandChild.c); // Returns 3
+    System.out.println(SIPExample.SIPExampleChild.SIPExampleGrandChild.d); // Returns 4
+    // Methods via instance
+    y.a(); // Returns "On public static nested class, private-package method"
+    y.b(); // Returns "On public static nested class, public method"
+    y.c(); // Returns "On public static nested class, protected method"
+    y.d(); // Returns "On public static nested class, private method"
+    // Methods via class
+    SIPExample.SIPExampleChild.SIPExampleGrandChild.a(); // Returns "On public static nested class, private-package method"
+    SIPExample.SIPExampleChild.SIPExampleGrandChild.b(); // Returns "On public static nested class, public method"
+    SIPExample.SIPExampleChild.SIPExampleGrandChild.c(); // Returns "On public static nested class, protected method"
+    SIPExample.SIPExampleChild.SIPExampleGrandChild.d(); // Returns "On public static nested class, private method"
+
+    var z = new SIPExample().new SIPExampleChild();
+    // NON-STATIC
+    // Attributes
+    System.out.println(z.fname); // Returns "Ansha"
+    System.out.println(z.lname); // Returns "Cerbia"
+    System.out.println(z.age); // Returns 17
+    System.out.println(z.country); // Returns "Indonesia"
+    // Methods
+    z.test(); // Returns "On public inner class, private-package method"
+    z.test2(); // Returns "On public inner class, public method"
+    z.test3(); // Returns "On public inner class, protected method"
+    z.test4(); // Returns "On public inner class, private method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(z.a); // Returns 1
+    System.out.println(z.b); // Returns 2
+    System.out.println(z.c); // Returns 3
+    System.out.println(z.d); // Returns 4
+    // Attributes via class
+    System.out.println(SIPExample.SIPExampleChild.a); // Returns 1
+    System.out.println(SIPExample.SIPExampleChild.b); // Returns 2
+    System.out.println(SIPExample.SIPExampleChild.c); // Returns 3
+    System.out.println(SIPExample.SIPExampleChild.d); // Returns 4
+    // Methods via instance
+    z.a(); // Returns "On public inner class, private-package method"
+    z.b(); // Returns "On public inner class, public method"
+    z.c(); // Returns "On public inner class, protected method"
+    z.d(); // Returns "On public inner class, private method"
+    // Methods via class
+    SIPExample.SIPExampleChild.a(); // Returns "On public inner class, private-package method"
+    SIPExample.SIPExampleChild.b(); // Returns "On public inner class, public method"
+    SIPExample.SIPExampleChild.c(); // Returns "On public inner class, protected method"
+    SIPExample.SIPExampleChild.d(); // Returns "On public inner class, private method"
+
+    /*
+     * For a, b, c, d, e, f:
+     *
+     * Static Attribute/Method (via class):
+     * - Private-Package -> Not Accessible (Except a and b)
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     *
+     * Static Attribute/Method (via instance):
+     * - Private-Package -> Not Accessible (Except a and b)
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     */
+
+    /*
+     * Each class of instances (a, b, c): Same package with this class
+     *
+     * Constructor:
+     * - Private-Package -> Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     *
+     * Non-Static Attribute/Method:
+     * - Private-Package -> Accessible (Except c)
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     *   Note: Accessible via getter
+     */
+    var aa = new SubclassOfNestedClass();
+    // NON-STATIC
+    // Attributes
+    System.out.println(aa.fname); // Returns "Ansha"
+    System.out.println(aa.lname); // Returns "Cerbia"
+    System.out.println(aa.age); // Returns 17
+    // Methods
+    aa.test(); // Returns "On public inner class, private-package method"
+    aa.test2(); // Returns "On public inner class, public method"
+    aa.test3(); // Returns "On public inner class, protected method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(aa.a); // Returns 1
+    System.out.println(aa.b); // Returns 2
+    System.out.println(aa.c); // Returns 3
+    // Attributes via class
+    System.out.println(SubclassOfNestedClass.a); // Returns 1
+    System.out.println(SubclassOfNestedClass.b); // Returns 2
+    System.out.println(SubclassOfNestedClass.c); // Returns 3
+    // Methods via instance
+    aa.a(); // Returns "On public inner class, private-package method"
+    aa.b(); // Returns "On public inner class, public method"
+    aa.c(); // Returns "On public inner class, protected method"
+    // Methods via class
+    SubclassOfNestedClass.a(); // Returns "On public inner class, private-package method"
+    SubclassOfNestedClass.b(); // Returns "On public inner class, public method"
+    SubclassOfNestedClass.c(); // Returns "On public inner class, protected method"
+
+    var bb = new SubclassOfNestedClass2();
+    // NON-STATIC
+    // Attributes
+    System.out.println(bb.fname); // Returns "Ansha"
+    System.out.println(bb.lname); // Returns "Cerbia"
+    System.out.println(bb.age); // Returns 17
+    // Methods
+    bb.test(); // Returns "On public inner class, private-package method"
+    bb.test2(); // Returns "On public inner class, public method"
+    bb.test3(); // Returns "On public inner class, protected method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(bb.a); // Returns 1
+    System.out.println(bb.b); // Returns 2
+    System.out.println(bb.c); // Returns 3
+    // Attributes via class
+    System.out.println(SubclassOfNestedClass2.a); // Returns 1
+    System.out.println(SubclassOfNestedClass2.b); // Returns 2
+    System.out.println(SubclassOfNestedClass2.c); // Returns 3
+    // Methods via instance
+    bb.a(); // Returns "On public inner class, private-package method"
+    bb.b(); // Returns "On public inner class, public method"
+    bb.c(); // Returns "On public inner class, protected method"
+    // Methods via class
+    SubclassOfNestedClass2.a(); // Returns "On public inner class, private-package method"
+    SubclassOfNestedClass2.b(); // Returns "On public inner class, public method"
+    SubclassOfNestedClass2.c(); // Returns "On public inner class, protected method"
+
+    var cc = new SubclassOfNestedClass3();
+    // NON-STATIC
+    // Attributes
+    System.out.println(cc.lname); // Returns "Cerbia"
+    System.out.println(cc.age); // Returns 17
+    // Methods
+    cc.test2(); // Returns "On public inner class, public method"
+    cc.test3(); // Returns "On public inner class, protected method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(cc.b); // Returns 2
+    System.out.println(cc.c); // Returns 3
+    // Attributes via class
+    System.out.println(SubclassOfNestedClass3.b); // Returns 2
+    System.out.println(SubclassOfNestedClass3.c); // Returns 3
+    // Methods via instance
+    cc.b(); // Returns "On public inner class, public method"
+    cc.c(); // Returns "On public inner class, protected method"
+    // Methods via class
+    SubclassOfNestedClass3.b(); // Returns "On public inner class, public method"
+    SubclassOfNestedClass3.c(); // Returns "On public inner class, protected method"
+
+    /*
+     * Each class of instances (d, e, f): Different package with this class
+     *
+     * Constructor:
+     * - Private-Package -> Not Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Not Accessible
+     * - Private         -> Not Accessible
+     *
+     * Non-Static Attribute/Method:
+     * - Private-Package -> Not Accessible
+     * - Public          -> Accessible
+     * - Protected       -> Accessible
+     * - Private         -> Not Accessible
+     *   Note: Accessible via getter
+     */
+    var dd = new com.clairvoyant.project3.SubclassOfNestedClass("");
+    // NON-STATIC
+    // Attributes
+    System.out.println(dd.lname); // Returns "Cerbia"
+    System.out.println(dd.age); // Returns 17
+    // Methods
+    dd.test2(); // Returns "On public inner class, public method"
+    dd.test3(); // Returns "On public inner class, protected method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(dd.b); // Returns 2
+    System.out.println(dd.c); // Returns 3
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.SubclassOfNestedClass.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.SubclassOfNestedClass.c); // Returns 3
+    // Methods via instance
+    dd.b(); // Returns "On public inner class, public method"
+    dd.c(); // Returns "On public inner class, protected method"
+    // Methods via class
+    com.clairvoyant.project3.SubclassOfNestedClass.b(); // Returns "On public inner class, public method"
+    com.clairvoyant.project3.SubclassOfNestedClass.c(); // Returns "On public inner class, protected method"
+
+    var ee = new com.clairvoyant.project3.SubclassOfNestedClass2("");
+    // NON-STATIC
+    // Attributes
+    System.out.println(ee.lname); // Returns "Cerbia"
+    System.out.println(ee.age); // Returns 17
+    // Methods
+    ee.test2(); // Returns "On public inner class, public method"
+    ee.test3(); // Returns "On public inner class, protected method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(ee.b); // Returns 2
+    System.out.println(ee.c); // Returns 3
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.SubclassOfNestedClass2.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.SubclassOfNestedClass2.c); // Returns 3
+    // Methods via instance
+    ee.b(); // Returns "On public inner class, public method"
+    ee.c(); // Returns "On public inner class, protected method"
+    // Methods via class
+    com.clairvoyant.project3.SubclassOfNestedClass2.b(); // Returns "On public inner class, public method"
+    com.clairvoyant.project3.SubclassOfNestedClass2.c(); // Returns "On public inner class, protected method"
+
+    var ff = new com.clairvoyant.project3.SubclassOfNestedClass3("");
+    // NON-STATIC
+    // Attributes
+    System.out.println(ff.lname); // Returns "Cerbia"
+    System.out.println(ff.age); // Returns 17
+    // Methods
+    ff.test2(); // Returns "On public inner class, public method"
+    ff.test3(); // Returns "On public inner class, protected method"
+
+    // STATIC
+    // Attributes via instance
+    System.out.println(ff.b); // Returns 2
+    System.out.println(ff.c); // Returns 3
+    // Attributes via class
+    System.out.println(com.clairvoyant.project3.SubclassOfNestedClass3.b); // Returns 2
+    System.out.println(com.clairvoyant.project3.SubclassOfNestedClass3.c); // Returns 3
+    // Methods via instance
+    ff.b(); // Returns "On public inner class, public method"
+    ff.c(); // Returns "On public inner class, protected method"
+    // Methods via class
+    com.clairvoyant.project3.SubclassOfNestedClass3.b(); // Returns "On public inner class, public method"
+    com.clairvoyant.project3.SubclassOfNestedClass3.c(); // Returns "On public inner class, protected method"
   }
 }
